@@ -1,0 +1,36 @@
+{% load admin_static %}{% load firstof from future %}<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+<head>
+<title>FluTweeker</title>
+</head>
+<body>
+    <div style="font-family: 'Century Gothic', sans-serif; font-size:30pt; color: #21332C">
+         <div><b> FluTweeker: </b></div>
+		 <div> Find potential flu outbreaks near you from realtime Tweet feed</div>
+		 <div></div>
+	</div>
+	<div class="col-md-7">
+        <div class="map">
+            {% include map_name %}
+        </div>
+    </div>
+    
+	<div class="col-md-4" style="font-family: 'Century Gothic', sans-serif; font-size:20pt; color: #21332C">
+	    <form method="GET" action="/search/">
+		    <label for="your_name">Zip Code/City </label>
+            <input type="text" name="textfield">
+            <button type="submit">Find flu near you</button>
+        </form>
+		<div>Location: {{ location }}</div>
+		<div>Flu Outbreaks {{flu_outbreak }} </div>
+    	<div>Severity: {{ severity }}</div>
+		<div>Last Updated: {{update_time}}</div>
+		<div>(update every hour)</div>
+		<div></div>
+		<li><a href="{% url 'flu:index' %}"><div id="rect">back to nationwide map</div></li>
+		<div></div>
+		<li><a href="{% url 'flu:about' %}"><div id="rect">about</div></li>
+		</div>
+	</div>
+</body>
+</html>
